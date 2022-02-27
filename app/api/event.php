@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/21
- * Time: 14:54
+ * Date: 2022/1/21
  */
 
 return [
@@ -12,5 +11,7 @@ return [
     ],
     'listen' => [
         'login' => [\app\api\listener\Login::class],
+        //支付
+        'paying' => [],
     ]
 ];

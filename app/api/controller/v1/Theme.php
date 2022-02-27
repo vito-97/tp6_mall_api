@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/25
- * Time: 10:37
+ * Date: 2022/1/25
  */
 
 namespace app\api\controller\v1;
@@ -67,7 +66,7 @@ class Theme extends Base
     }
 
     /**
-     * 主题关联产品
+     * 主题关联商品
      * @url /theme/:t_id/product/:p_id
      * @Http POST
      * @param int $t_id 主题id
@@ -90,7 +89,7 @@ class Theme extends Base
     }
 
     /**
-     * 主题删除关联产品
+     * 主题删除关联商品
      * @url /theme/:t_id/product/:p_id
      * @Http DELETE
      * @param int $t_id 主题id

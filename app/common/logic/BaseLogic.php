@@ -2,19 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/18
- * Time: 16:15
+ * Date: 2022/1/18
  */
 
 namespace app\common\logic;
 
 
+use app\api\traits\UserTrait;
+use app\common\exception\ErrorException;
 use app\common\model\mysql\BaseModel;
 use think\facade\Cache;
 use think\Model;
 
 abstract class BaseLogic
 {
+    use UserTrait;
     //模型
     protected $model;
 
@@ -161,6 +163,10 @@ abstract class BaseLogic
             $this->model = new $className;
             return $this->model;
         }
+
+        $msg = "未定义{$name}模型";
+
+        throw new ErrorException(['msg' => $msg]);
 
         return false;
     }

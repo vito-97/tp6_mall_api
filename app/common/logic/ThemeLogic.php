@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/25
- * Time: 10:51
+ * Date: 2022/1/25
  */
 
 namespace app\common\logic;
@@ -35,7 +34,7 @@ class ThemeLogic extends BaseLogic
     }
 
     /**
-     * 获取主题并关联产品
+     * 获取主题并关联商品
      * @param $id
      * @return \app\common\model\mysql\BaseModel|array|false|mixed|\think\Model|null
      * @throws \think\db\exception\DataNotFoundException

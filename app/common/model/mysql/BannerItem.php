@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/24
- * Time: 16:30
+ * Date: 2022/1/24
  */
 
 namespace app\common\model\mysql;

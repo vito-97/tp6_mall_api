@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/21
- * Time: 13:13
+ * Date: 2022/1/21
  */
 
 namespace app\common\exception;

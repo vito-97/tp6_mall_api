@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/22
- * Time: 15:08
+ * Date: 2022/1/22
  */
 
 namespace app\common\traits;
@@ -26,9 +25,9 @@ trait AppTrait
      */
     protected function setLogic($class)
     {
-        if ( is_string($class) ) {
+        if (is_string($class)) {
             $this->logic = new $class;
-        } elseif ( is_object($class) && $class instanceof BaseLogic ) {
+        } elseif (is_object($class) && $class instanceof BaseLogic) {
             $this->logic = $class;
         }
 
@@ -40,33 +39,38 @@ trait AppTrait
      * @return BaseLogic
      * @throws ErrorException
      */
-    protected function getLogic()
+    protected function getLogic($name = null)
     {
-        if ( $this->logic ) {
+        if ($this->logic) {
             return $this->logic;
         }
 
-        $class = static::class;
-
         $module = app('http')->getName();
 
-        $name = basename($class);
+        if (!$name) {
+            $class = static::class;
+            $name = basename($class);
+        } else {
+            $name = ucfirst($name);
+        }
 
         $className = "app\\{$module}\\logic\\{$name}Logic";
 
-        if ( $module && class_exists($className) ) {
+        if ($module && class_exists($className)) {
             $this->logic = new $className;
             return $this->logic;
         }
 
         $className = "app\\common\\logic\\{$name}Logic";
 
-        if ( class_exists($className) ) {
+        if (class_exists($className)) {
             $this->logic = new $className;
             return $this->logic;
         }
 
-        throw new ErrorException('请定义逻辑操作类');
+        $msg = "未定义[$name]逻辑类";
+
+        throw new ErrorException($msg);
     }
 
     /**
@@ -78,11 +82,11 @@ trait AppTrait
     {
         $size = $this->request->param('size', $default, 'intval');
 
-        if ( $size <= 0 ) {
+        if ($size <= 0) {
             $size = $default;
         }
 
-        if ( $size > 100 ) {
+        if ($size > 100) {
             $size = 100;
         }
         return $size;
@@ -116,19 +120,19 @@ trait AppTrait
     {
         static $type;
 
-        if ( empty($type) ) {
+        if (empty($type)) {
             $types = $this->getResponseTypes();
 
-            $key     = config('web.api_response_key');
+            $key = config('web.api_response_key');
             $default = config('web.api_default_response');
 
-            if ( !in_array($default, $types) ) {
+            if (!in_array($default, $types)) {
                 $type = 'json';
             }
 
             $type = $this->request->param($key, $default, 'strtolower');
 
-            if ( !in_array($type, $types) ) {
+            if (!in_array($type, $types)) {
                 $type = $default;
             }
         }
@@ -144,11 +148,11 @@ trait AppTrait
     {
         static $types;
 
-        if ( empty($types) ) {
+        if (empty($types)) {
             $path = base_path() . '/commom/response/*.php';
 
             $types = array_map(
-                function($file) {
+                function ($file) {
                     return strtolower(substr(basename($file), 0, -3));
                 },
                 glob($path)

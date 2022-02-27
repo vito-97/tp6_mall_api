@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/18
- * Time: 17:16
+ * Date: 2022/1/18
  */
 
 namespace app\common;
@@ -21,6 +20,7 @@ class CodeMessage
     const USER_REGISTER_ERROR = 1005;
     const USER_LOGOUT_ERROR = 1006;
     const USER_NOT_LOGIN = 1100;
+    const USER_NOT_OPENID = 1110;
 
     const SEND_SMS_ERROR = 2001;
     const SMS_VALIDATE_ERROR = 2002;
@@ -30,8 +30,16 @@ class CodeMessage
     const THEME_DELETE_PRODUCT_ERROR = 3003;
 
     const PRODUCT_NOT_FOUND = 4001;
+    const PRODUCT_NOT_STOCK = 4002;
 
     const CATEGORY_EMPTY = 5001;
+
+    const ADDRESS_EMPTY = 6001;
+    const ADDRESS_SAVE_ERROR = 6002;
+
+    const ORDER_NOT_FOUND = 6002;
+
+    const PAY_ERROR = 6001;
 
     const VALIDATE_ERROR = 9001;
     const NOT_EXISTS_ERROR = 9002;
@@ -55,6 +63,7 @@ class CodeMessage
         self::USER_REGISTER_ERROR    => '注册失败',
         self::USER_NOT_LOGIN         => '未登录',
         self::USER_LOGOUT_ERROR      => '登出失败',
+        self::USER_NOT_OPENID        => '未授权获取openid',
 
         self::SEND_SMS_ERROR     => '发送短信失败',
         self::SMS_VALIDATE_ERROR => '验证码错误',
@@ -66,6 +75,11 @@ class CodeMessage
         self::PRODUCT_NOT_FOUND => '商品不存在',
 
         self::CATEGORY_EMPTY => '未定义分类',
+
+        self::ADDRESS_EMPTY      => '未设置地址',
+        self::ADDRESS_SAVE_ERROR => '地址保存失败',
+
+        self::PAY_ERROR => '拉起支付失败',
 
         self::VALIDATE_ERROR       => '数据验证失败',
         self::NOT_EXISTS_ERROR     => '数据不存在',
@@ -82,7 +96,7 @@ class CodeMessage
      */
     public static function setMessage($code, $message = '')
     {
-        if ( is_array($code) ) {
+        if (is_array($code)) {
             self::$message = array_merge(self::$message, $code);
         } else {
             self::$message[$code] = $message;

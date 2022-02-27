@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/22
- * Time: 16:28
+ * Date: 2022/1/22
  */
 
 namespace app\common\logic;
@@ -94,15 +93,20 @@ class UserLogic extends BaseLogic
 
         Event::trigger(new LoginEvent($user));
 
-        $user = $user->visible(['id', 'username', 'phone', 'nickname']);
+        $user = $user->visible(['id', 'username', 'phone', 'nickname','openid']);
         //生成token
         $token = $this->createLoginToken();
         //设置登录用户
-        $this->setLoginUser($token, $user);
+        $this->setLoginUser($token, $user->toArray());
 
         return ['token' => $token, 'user' => $user];
     }
 
+    /**
+     * 创建用户
+     * @param $openID
+     * @return \app\common\model\mysql\BaseModel|bool|false
+     */
     public function createUserByOpenID($openID)
     {
         return $this->create(['openid' => $openID, 'status' => User::STATUS_ON]);
@@ -194,7 +198,7 @@ class UserLogic extends BaseLogic
      */
     public function getLoginToken()
     {
-        $token = Request::header('token');
+        $token = Request::header('token',Request::param('token')) ;
 
         return $token;
     }

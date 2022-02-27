@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/25
- * Time: 14:26
+ * Date: 2022/1/25
  */
 
 namespace app\common\logic;
@@ -50,7 +49,7 @@ class ProductLogic extends BaseLogic
     {
         $args = [
             'with' => [
-                'imgs' => function($query) {
+                'imgs' => function ($query) {
                 },
                 'properties'
             ]
@@ -59,5 +58,26 @@ class ProductLogic extends BaseLogic
         $result = $this->getModel()->getByID($id, $args);
 
         return $result;
+    }
+
+    /**
+     * 获取通过ID获取商品
+     * @param $pid
+     * @return array
+     * @throws \app\common\exception\ErrorException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function getProductsByID($pid)
+    {
+        $args = [
+            'where' => [
+                'id' => $pid
+            ],
+            'field' => ['id', 'price', 'stock', 'name', 'main_img_url', 'from'],
+        ];
+
+        return $this->getModel()->getLists($args, false)->toArray();
     }
 }

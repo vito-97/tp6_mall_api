@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/25
- * Time: 10:41
+ * Date: 2022/1/25
  */
 
 namespace app\common\validate;

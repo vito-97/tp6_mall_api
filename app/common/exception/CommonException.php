@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/21
- * Time: 12:10
+ * Date: 2022/1/21
  */
 
 namespace app\common\exception;
@@ -20,16 +19,17 @@ abstract class CommonException extends Exception
 
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        if ( is_array($message) ) {
-            if ( !empty($message['code']) ) {
+        if (is_array($message)) {
+            if (!empty($message['code'])) {
                 $this->errorCode = $message['code'];
             }
-            if ( !empty($message['message']) || !empty($message['msg']) ) {
+            if (!empty($message['message']) || !empty($message['msg'])) {
                 $message = $message['message'] ?? $message['msg'];
             }
-        } else if ( $code || is_integer($message) ) {
+        } else if ($code || is_integer($message)) {
             $this->errorCode = $code ?: $message;
-            $message         = CodeMessage::getMessage($this->errorCode);
+            if (is_integer($message))
+                $message = CodeMessage::getMessage($this->errorCode);
         }
         parent::__construct($message, 0, $previous);
     }

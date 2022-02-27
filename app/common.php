@@ -116,3 +116,12 @@ function curl_get($url, &$httpCode = 0)
     curl_close($ch);
     return $file_contents;
 }
+
+/**
+ * 加载微信支付SDK
+ */
+function load_wx_pay_sdk(){
+    $path = root_path() . '/extend/WxPay/';
+    require_once $path . 'WxPay.Api.php';
+    require_once $path . 'WxPay.Config.php';
+}

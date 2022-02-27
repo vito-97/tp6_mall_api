@@ -2,13 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/21
- * Time: 14:16
+ * Date: 2022/1/21
  */
 $host = $_SERVER['HTTP_HOST'] ?? '';
 return [
     //是否是本地开发
-    'is_local'             => $host === 'tp6.cn',
+    'is_local' => $host === 'mall.cn',
+
+    //是否抛出错误
+    'throw'                => false,
 
     //图片地址
     'img_host'             => "http://{$host}/static/images",

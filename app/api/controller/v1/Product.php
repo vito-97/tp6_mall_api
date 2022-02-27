@@ -2,8 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Vito
- * Date: 2022/2/25
- * Time: 13:42
+ * Date: 2022/1/25
  */
 
 namespace app\api\controller\v1;
@@ -20,7 +19,7 @@ class Product extends Base
     public $noLoginRequired = true;
 
     /**
-     * 获取指定分类下的产品
+     * 获取指定分类下的商品
      * @url /product?id=:category_id&page=:page&size=:size
      * @param int $id
      * @return mixed
@@ -39,7 +38,7 @@ class Product extends Base
     }
 
     /**
-     * 获取指定分类下的所有产品
+     * 获取指定分类下的所有商品
      * @url /product/all?id=:category_id
      * @param int $id
      * @return mixed
